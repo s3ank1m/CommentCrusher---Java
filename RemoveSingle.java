@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 public class RemoveSingle {
     // Primary class everything revolves around. Scans each line for comments and write each line to the file with comments removed if they exist
-    public int readRemove(String userFile) throws Exception {
+    public int readRemove(String userFile, String outputFile) throws Exception {
         String currentLine, writeLine;
         
         File f = new File(userFile);
@@ -16,7 +16,7 @@ public class RemoveSingle {
             System.out.println("Test: " + currentLine + " Length: " + currentLine.length()); // test
             writeLine = searchDestroy(currentLine);
             // Write into the file here
-            new WriteToFile().writeFile("output.txt", writeLine);
+            new WriteToFile().writeFile(outputFile, writeLine);
         }
         
         s.close();
@@ -34,7 +34,7 @@ public class RemoveSingle {
         for(int i = 0; i < line.length() - 1; i++) { // line.length - 1 due to possibility of an index out of bound error
             if(line.charAt(i) == '/' && line.charAt(i + 1) == '/') { // Scans line to see where to delete comments
                 commentLocation = i; // Mark where the comment begins
-                commentRemoved = removeComment(line, commentLocation); // "output.txt" is temporary
+                commentRemoved = removeComment(line, commentLocation);
                 return commentRemoved;
             }
         }
@@ -55,14 +55,14 @@ public class RemoveSingle {
     }
 
     // Constructor
-    public int removeSingle(String userFile) throws Exception {
-        readRemove(userFile);
+    public int removeSingle(String userFile, String outputFile) throws Exception {
+        readRemove(userFile, outputFile);
 
         return 0;
     } 
 
     // For testing purposes
     public static void main(String[] args) throws Exception {
-        new RemoveSingle().readRemove("test.java"); // test
+        new RemoveSingle().readRemove("test.java", "output.txt"); // test
     }
 }

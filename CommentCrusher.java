@@ -25,24 +25,29 @@ public class CommentCrusher {
 
     public void driver() throws Exception{
         System.out.println("Test: Driver Accessed!"); // test
-        String userInput;
+        String fileName, outputFile;
         Scanner s = new Scanner(System.in);
 
         // Read in file name input from user
         System.out.println("Select file to use");
         System.out.print("> ");
-        userInput = s.nextLine();
+        fileName = s.nextLine();
+        System.out.println("Enter output file name:");
+        System.out.print("> ");
+        outputFile = s.nextLine();
+
         s.close();
 
-        System.out.println("Test: " + userInput); // test
+        System.out.println("Test: " + fileName); // test
 
         // Check if file exists
-        if(fileExists(userInput)) {
+        if(fileExists(fileName)) {
             // Looks for single line comments and deletes them
-            System.out.println("File '" + userInput + "' Found!");
-            System.out.println(new RemoveSingle().readRemove(userInput)); // Test-ish output
+            System.out.println("File '" + fileName + "' Found!");
+            System.out.println(new RemoveSingle().readRemove(fileName, outputFile)); // Test-ish output
         }
         else {
+            System.out.println("File not found. Exiting...");
             System.exit(0); // Terminate program if a file is not found
         }
     }
